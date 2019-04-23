@@ -1,6 +1,6 @@
 {
   "name": "beeves",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Beeves",
   "main": "./beeves-base-extension/js/bg_init.js",
   "scripts": {
@@ -12,15 +12,18 @@
     "type": "git",
     "url": "git+https://github.com/beevesuw/beeves.git"
   },
-  "contributors": ["Aditya Chatterjee <achat@uw.edu>", "Altan Orhon <altan@beeves.dev>"]
+  "contributors": [
+    "Aditya Chatterjee <achat@uw.edu>",
+    "Altan Orhon <altan@beeves.dev>"
+  ],
   "license": "MPL 2.0",
   "bugs": {
     "url": "https://github.com/beevesuw/beeves/issues"
   },
   "homepage": "https://github.com/beevesuw/beeves#readme",
   "devDependencies": {
+    "prettier": "1.17.0",
     "web-ext": "^3.0.0"
-
   },
   "dependencies": {
     "lodash": "^4.17.11",
