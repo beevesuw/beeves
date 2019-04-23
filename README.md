@@ -16,9 +16,8 @@
 - contains activation keyword (do we need a global registry mapping activation keywords to beeves enabled extensions to prevent conflicts?)
 - for extensions that manipulate the DOM and perform site-specific actions, do we need a list of URIs on which the extension is allowed to perform actions?
 
-## Firefox config for debugging: 
-(ONLY ON YOUR DEVELOPMENT INSTANCE OF FIREFOX, DO NOT DO IMPORTANT WORK WITH THESE SETTINGS)
+## How to rnu:
 
-Type about:config in the FireFox address bar 
-set security.csp.enable to false
-set security.csp.enableStrictDynamic to false
+In the root directory (`beeves`), type:
+
+`npm run test`
