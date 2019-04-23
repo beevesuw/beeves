@@ -16,8 +16,13 @@
 - contains activation keyword (do we need a global registry mapping activation keywords to beeves enabled extensions to prevent conflicts?)
 - for extensions that manipulate the DOM and perform site-specific actions, do we need a list of URIs on which the extension is allowed to perform actions?
 
-## How to rnu:
+## Instructions:
+
+
+### Install
 
 In the root directory (`beeves`), type:
+`npm run install`
 
+### Run
 `npm run test`
