@@ -2,13 +2,12 @@
 
 - Loads a Beeves metadata file, a superset of a snips file, on installation
 - Maintains extension metadata and hotword dicts in browser.storage.local
-- Extremely basic speech to text
-
-## TODO:
-
 - Train the backend when a new beeves compliant extension is registered
 - Dispatch commands to the backend and recieve parsed intents with slot data
 - Send this to the extension in question, which has implemented response functionality
+- Extremely basic speech to text
+
+## TODO:
 
 ## Notes on the Beeves metadata file
 
