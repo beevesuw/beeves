@@ -12,7 +12,6 @@ let agentVue = new Vue({
 })
 
 messageHandler = async function(agent, sender, sendResponse){
-    alert(agent);
     agentVue.state = agent.state;
     return Promise.resolve(true);
 }
