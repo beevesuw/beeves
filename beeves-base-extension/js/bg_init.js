@@ -1,7 +1,6 @@
 /**
  * handles initialization for beeves compatible webextensions
  * stores extension metadata (beeves.json) when the extension is loaded
- * @todo train the NLU backend for the current extension
 */
 
 /** 

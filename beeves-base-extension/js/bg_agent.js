@@ -19,14 +19,15 @@ agent = {
     this.state = newState;
   },
   update: function(){
-    var sending = browser.tabs.sendMessage(
-      this.tabId,
-      {
-        state: this.state
-      }
-    )
+    if(this.tabId!=null){
+      var sending = browser.tabs.sendMessage(
+        this.tabId,
+        {
+          state: this.state
+        }
+      )
+    }
   }
-
 }
 
 function tabActivated(activeInfo) {
