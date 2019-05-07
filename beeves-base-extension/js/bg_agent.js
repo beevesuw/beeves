@@ -9,12 +9,21 @@ browser.browserAction.onClicked.addListener(function(){
   }
 );
 
-function tabChanged(activeInfo) {
+function tabActivated(activeInfo) {
   console.log(activeInfo);
   var sending = browser.tabs.sendMessage(
     activeInfo.tabId,                
-    'you are the new tab'
+    'you have been activated'
   )
 }
 
-browser.tabs.onActivated.addListener(tabChanged);
+function tabCreated(tab) {
+  console.log(tab.id);
+  var sending = browser.tabs.sendMessage(
+    tab.id,
+    'you have been created'
+  )
+}
+
+browser.tabs.onActivated.addListener(tabActivated);
+browser.tabs.onCreated.addListener(tabCreated);
