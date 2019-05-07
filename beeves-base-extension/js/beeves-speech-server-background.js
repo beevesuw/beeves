@@ -29,7 +29,6 @@ class BeevesNativeRouter {
     }
   }
 }
-
 const beevesNativeRouterInstance = new BeevesNativeRouter("beeves_speech_server", {
   hotword: (x) => {
     return x;
