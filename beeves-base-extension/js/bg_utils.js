@@ -20,7 +20,7 @@ async function putData(endpoint, payload) {
       body: JSON.stringify(payload)
     });
     res = await res.json();
-    //log(res);
+    console.log(res);
     return res;
   }catch(err) {
     console.log(err);

@@ -11,6 +11,12 @@
   "background": {
     "scripts": ["./js/bg_agent.js", "./js/bg_init.js", "./js/bg_utils.js", "./js/bg_dispatcher.js", "./js/class_BeevesRPC.js"]
   },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["./js/vue.js", "./js/cn_agent.js"]
+    }
+  ],
   "icons": {
     "128": "run.png"
   },
