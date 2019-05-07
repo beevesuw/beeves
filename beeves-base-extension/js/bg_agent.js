@@ -6,6 +6,7 @@ browser.browserAction.onClicked.addListener(function(){
       height: 250
     };
     var let = browser.windows.create(createData);
+    browser.runtime.openOptionsPage();
   }
 );
 

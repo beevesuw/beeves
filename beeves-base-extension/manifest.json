@@ -17,6 +17,10 @@
       "js": ["./js/vue.js", "./js/cn_agent.js"]
     }
   ],
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true
+  },
   "icons": {
     "128": "run.png"
   },
