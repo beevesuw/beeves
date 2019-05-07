@@ -9,20 +9,36 @@ browser.browserAction.onClicked.addListener(function(){
   }
 );
 
+agent = {
+  state: 'created',
+  tabId: null,
+  setTab: function(tabId){
+    this.tabId = tabId;
+  },
+  setState: function(newState){
+    this.state = newState;
+  },
+  update: function(){
+    var sending = browser.tabs.sendMessage(
+      this.tabId,
+      {
+        state: this.state
+      }
+    )
+  }
+
+}
+
 function tabActivated(activeInfo) {
   console.log(activeInfo);
-  var sending = browser.tabs.sendMessage(
-    activeInfo.tabId,                
-    'you have been activated'
-  )
+  agent.setTab(activeInfo.tabId);
+  agent.update();
 }
 
 function tabCreated(tab) {
   console.log(tab.id);
-  var sending = browser.tabs.sendMessage(
-    tab.id,
-    'you have been created'
-  )
+  agent.setTab(tab.id);
+  agent.update();
 }
 
 browser.tabs.onActivated.addListener(tabActivated);
