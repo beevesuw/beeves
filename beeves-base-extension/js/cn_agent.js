@@ -4,9 +4,17 @@ agentDiv.setAttribute("id", "agent");
 agentDiv.innerHTML = `{{ message }}`;
 document.body.appendChild(agentDiv);
 
-var agentVue = new Vue({
+let agentVue = new Vue({
     el: '#agent',
     data: {
-      message: 'Hello Vue!'
+      message: 'none'
     }
-  })
+})
+
+messageHandler = async function(message, sender, sendResponse){
+    alert(message);
+    agentVue.message = message;
+    return Promise.resolve(true);
+}
+
+browser.runtime.onMessage.addListener(messageHandler);
