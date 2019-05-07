@@ -1,38 +1,38 @@
 {
-  "name": "beeves",
-  "version": "1.0.0",
-  "description": "Beeves",
-  "main": "./beeves-base-extension/js/bg_init.js",
-  "scripts": {
-    "test": "web-ext run --source-dir ./beeves-base-extension/ --pref security.csp.enable=false --pref security.csp.enableStrictDynamic=false",
-    "demo:example": "#  NOT WORKING cross-env MOZ_DISABLE_CONTENT_SANDBOX=1 web-ext run --browser-console --url about:debugging --source-dir demo/example",
-    "//": "comment: fix demo:example above to launch ff with beeves and the extension"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/beevesuw/beeves.git"
-  },
-  "contributors": [
-    "Aditya Chatterjee <achat@uw.edu>",
-    "Altan Orhon <altan@beeves.dev>"
-  ],
-  "license": "MPL-2.0",
-  "bugs": {
-    "url": "https://github.com/beevesuw/beeves/issues"
-  },
-  "homepage": "https://github.com/beevesuw/beeves#readme",
-  "devDependencies": {
-    "prettier": "1.17.0",
-    "web-ext": "^3.0.0"
-  },
-  "dependencies": {
-    "lodash": "^4.17.11",
-    "node-nlp": "^3.0.3",
-    "porcupine": "^0.1.2"
-  },
-  "peerDependencies": {
-    "ts-enum-util": "^4.0.0",
-    "typescript": "^3.4.4",
-    "regexp2": "^1.2.1"
-  }
+	"name": "beeves",
+	"version": "1.0.0",
+	"description": "Beeves",
+	"main": "./beeves-base-extension/js/bg_init.js",
+	"scripts": {
+		"test": "web-ext run --source-dir ./beeves-base-extension/ --pref security.csp.enable=false --pref security.csp.enableStrictDynamic=false  --browser-console --url about:debugging --verbose",
+		"demo:example": "#  NOT WORKING cross-env MOZ_DISABLE_CONTENT_SANDBOX=1 web-ext run --browser-console --url about:debugging --source-dir demo/example",
+		"//": "comment: fix demo:example above to launch ff with beeves and the extension"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/beevesuw/beeves.git"
+	},
+	"contributors": [
+		"Aditya Chatterjee <achat@uw.edu>",
+		"Altan Orhon <altan@beeves.dev>"
+	],
+	"license": "MPL-2.0",
+	"bugs": {
+		"url": "https://github.com/beevesuw/beeves/issues"
+	},
+	"homepage": "https://github.com/beevesuw/beeves#readme",
+	"devDependencies": {
+		"prettier": "1.17.0",
+		"web-ext": "^3.0.0"
+	},
+	"dependencies": {
+		"lodash": "^4.17.11",
+		"node-nlp": "^3.0.3",
+		"porcupine": "^0.1.2"
+	},
+	"peerDependencies": {
+		"ts-enum-util": "^4.0.0",
+		"typescript": "^3.4.4",
+		"regexp2": "^1.2.1"
+	}
 }
