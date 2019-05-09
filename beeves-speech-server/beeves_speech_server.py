@@ -10,30 +10,19 @@ import struct
 import sys
 from datetime import datetime
 from threading import Thread
+from beeves_util import send_native_message, recv_native_message
+import subprocess
+import sounddevice as sd
+import numpy  # Make sure NumPy is loaded before it is used in the callback
 
+assert numpy  # avoid "imported but unused" message (W0611)
 
-MAX_NATIVE_MESSAGE_LEN = 1048576
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'Porcupine/binding/python'))
 
 from porcupine import Porcupine  # noqa
 
 logging.basicConfig(level=logging.DEBUG)
-
-
-def encodeMessage(messageContent):
-    encodedContent = json.dumps(messageContent).encode('utf-8')
-    encodedLength = struct.pack('@I', len(encodedContent))
-    return {'length': encodedLength, 'content': encodedContent}
-
-
-# Send an encoded message to stdout
-def sendMessage(encodedMessage):
-    if len(encodedMessage['content']) > 0 and len(encodedMessage['content']) <= MAX_NATIVE_MESSAGE_LEN:
-        sys.stdout.buffer.write(encodedMessage['length'])
-        sys.stdout.buffer.write(encodedMessage['content'])
-        sys.stdout.buffer.flush()
-
 
 def get_keywords_directory(base_dir='./Porcupine/resources/keyword_files'):
     system = platform.system()
@@ -54,11 +43,6 @@ def int_or_str(text):
     except ValueError:
         return text
 
-
-import sounddevice as sd
-import numpy  # Make sure NumPy is loaded before it is used in the callback
-
-assert numpy  # avoid "imported but unused" message (W0611)
 
 
 class HotwordServer(Thread):
@@ -120,10 +104,12 @@ class HotwordServer(Thread):
                 pcm = struct.unpack_from("h" * porcupine.frame_length, indata)
                 result = porcupine.process(pcm)
                 if result:
-                    encoded_message = encodeMessage(
-                        {'hotword': keyword_name, 'message': 'detected', 'timestamp': str(datetime.now().isoformat())})
-                    sendMessage(encoded_message)
+                    send_native_message({'ns': 'hotword', 'state': 'on'})
+
                     logging.info('[%s] detected keyword' % str(datetime.now()))
+
+
+
                     #with sd.InputStream(samplerate=args.samplerate, device=args.device, channels=args.channels, callback=sdcallback) as asr_stream:
                     #    logging.info('Delegating to ASR...')
                     #    pass

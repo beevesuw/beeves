@@ -14,7 +14,6 @@
 		"<all_urls>",
 		"https://speaktome-2.services.mozilla.com/",
 		"storage",
-		"runtime",
 		"nativeMessaging",
 		"tabs"
 	],
@@ -22,11 +21,11 @@
 		"scripts": [
 			"./js/lodash.js",
 			"./js/bg_agent.js",
+			"./js/beeves-speech-server-background.js",
 			"./js/bg_init.js",
 			"./js/bg_utils.js",
 			"./js/bg_dispatcher.js",
-			"./js/class_BeevesRPC.js",
-			"./js/beeves-speech-server-background.js"
+			"./js/class_BeevesRPC.js"
 		]
 	},
 	"icons": {

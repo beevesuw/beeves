@@ -4,12 +4,26 @@
  * @todo train the NLU backend for the current extension
  */
 
+    const beevesNativeRouterInstance = new BeevesNativeRouter("beeves_speech_server", {
+        hotword: (x) => {
+            return x;
+        }, // handle hot
+        speech: (x) => {
+            return x;
+        }, // handle speech
+        sys: (x) => {
+            return x;
+        } // handle other kind of message
+    });
+
+
 /**
  * @description clears beeves metadata when beeves-base is loaded
  */
 browser.runtime.onInstalled.addListener(function() {
-  let clearStorage = browser.storage.local.clear();
-});
+    let clearStorage = browser.storage.local.clear();
+})
+
 
 /**
  * @description metadata storage handler, maintains objects corresponding to

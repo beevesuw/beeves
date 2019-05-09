@@ -6,8 +6,9 @@ import numpy as np
 import pyaudio
 import wave
 import webrtcvad
-from halo import Halo
 from scipy import signal
+
+from beeves_util import send_native_message, recv_native_message
 
 logging.basicConfig(level=20)
 
@@ -145,7 +146,7 @@ def main(ARGS):
     # Load DeepSpeech model
     if os.path.isdir(ARGS.model):
         model_dir = ARGS.model
-        ARGS.model = os.path.join(model_dir, 'output_graph.rounded.pbmm')
+        ARGS.model = os.path.join(model_dir, 'output_graph.pbmm')
         ARGS.alphabet = os.path.join(model_dir, ARGS.alphabet if ARGS.alphabet else 'alphabet.txt')
         ARGS.lm = os.path.join(model_dir, ARGS.lm)
         ARGS.trie = os.path.join(model_dir, ARGS.trie)
@@ -166,27 +167,22 @@ def main(ARGS):
     print("Listening (ctrl-C to exit)...")
     frames = vad_audio.vad_collector()
 
-    # Stream from microphone to DeepSpeech using VAD
-    spinner = None
-    if not ARGS.nospinner: spinner = Halo(spinner='line')
-
 
     stream_context = model.setupStream()
     wav_data = bytearray()
     for frame in frames:
         if frame is not None:
-            if spinner: spinner.start()
             logging.debug("streaming frame")
             model.feedAudioContent(stream_context, np.frombuffer(frame, np.int16))
             if ARGS.savewav: wav_data.extend(frame)
         else:
-            if spinner: spinner.stop()
-            logging.debug("end utterence")
+            logging.debug("end utterance")
             if ARGS.savewav:
                 vad_audio.write_wav(os.path.join(ARGS.savewav, datetime.now().strftime("savewav_%Y-%m-%d_%H-%M-%S_%f.wav")), wav_data)
                 wav_data = bytearray()
             text = model.finishStream(stream_context)
-            print("Recognized: %s" % text)
+            if len(text) > 0:
+                send_native_message({'ns': 'stt', 'transcript': text})
             stream_context = model.setupStream()
 
 if __name__ == '__main__':
@@ -202,8 +198,6 @@ if __name__ == '__main__':
 
     parser.add_argument('-v', '--vad_aggressiveness', type=int, default=3,
         help="Set aggressiveness of VAD: an integer between 0 and 3, 0 being the least aggressive about filtering out non-speech, 3 the most aggressive. Default: 3")
-    parser.add_argument('--nospinner', action='store_true',
-        help="Disable spinner")
     parser.add_argument('-w', '--savewav',
         help="Save .wav files of utterences to given directory")
 

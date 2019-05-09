@@ -18,25 +18,12 @@ class BeevesNativeRouter {
         this.mappings = mappings;
         this.mappingKey = mappingKey;
 
-        if (_.has(response, "mappingKey")) {
+        if (_.has(response, this.mappingKey)) {
           const ns = response[this.mappingKey];
-          let fn = this.mapping[ns];
-          if (!_.isEmpty(fn)) {
-            fn();
-          }
+          let fn = _.get(this.mappings, response[this.mappingKey], console.log);
+          fn();
         }
       });
     }
   }
 }
-const beevesNativeRouterInstance = new BeevesNativeRouter("beeves_speech_server", {
-  hotword: (x) => {
-    return x;
-  }, // handle hot
-  speech: (x) => {
-    return x;
-  }, // handle speech
-  sys: (x) => {
-    return x;
-  } // handle other kind of message
-});

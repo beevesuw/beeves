@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+
+<body>
+  <p>Hotword:</p>
+  <form>
+      <label>Hotword</label>
+      <input type="text" id="hotword" >
+      <button type="submit">Save</button>
+  </form>
+  <script>
+  /*If you want to share data or functions between the JavaScript on your options 
+  page and your background script(s), you can do so directly by obtaining a 
+  reference to the Window of your background scripts by using extension.getBackgroundPage(), 
+  or a reference to the Window of any of the pages running within your extension with 
+  extension.getViews(). Alternately, you can communicate between the JavaScript for your 
+  options page and your background script(s) using runtime.sendMessage(), runtime.onMessage, 
+  and/or runtime.connect(). The latter (or runtime.Port equivalents) can also be used to 
+  share options between your background script(s) and your content script(s).
+  In general, you will want to store options changed on option pages using the storage 
+  API to either storage.sync (if you want the settings synchronized across all instances of 
+  that browser that the user is logged into), or storage.local (if the settings are local to 
+  the current machine/profile). If you do so and your background script(s) (or content script(s)) 
+  need to know about the change, your script(s) might choose to add a listener to storage.onChanged.
+  */
+  </script>
+</body>
+
+</html>
+
