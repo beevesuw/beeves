@@ -9,12 +9,12 @@
   "version": "1.0",
   "permissions": ["notifications", "*://0.0.0.0:8337/*", "webRequest", "<all_urls>", "https://speaktome-2.services.mozilla.com/", "storage"],
   "background": {
-    "scripts": ["./js/bg_agent.js", "./js/bg_init.js", "./js/bg_utils.js", "./js/bg_dispatcher.js", "./js/class_BeevesRPC.js"]
+    "scripts": ["./js/bg_agent.js", "./js/bg_init.js", "./js/bg_utils.js", "./js/bg_dispatcher.js", "./js/class_BeevesRPC.js", "./js/jquery.js"]
   },
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "js": ["./js/vue.js", "./js/cn_agent.js"]
+      "js": ["./js/vue.js", "./js/cn_agent.js", "./js/jquery.js"]
     }
   ],
   "options_ui": {
