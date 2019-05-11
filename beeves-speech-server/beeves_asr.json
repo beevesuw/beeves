@@ -1,0 +1,7 @@
+{
+  "name": "beeves_asr",
+  "description": "Beeves speech server using native messaging",
+  "path": "/home/altan/cap/beeves/beeves-speech-server/start_beeves_asr.sh",
+  "type": "stdio",
+  "allowed_extensions": [ "beeves@beeves.dev" ]
+}

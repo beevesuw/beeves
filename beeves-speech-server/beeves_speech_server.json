@@ -1,0 +1,7 @@
+{
+  "name": "beeves_speech_server",
+  "description": "Beeves speech server using native messaging",
+  "path": "/home/altan/cap/beeves/beeves-speech-server/start_beeves_speech_server.sh",
+  "type": "stdio",
+  "allowed_extensions": [ "beeves@beeves.dev" ]
+}

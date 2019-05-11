@@ -1,0 +1,8 @@
+numpy
+sounddevice
+deepspeech
+pyaudio
+structlog
+webrtcvad
+halo
+scipy
