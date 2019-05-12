@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#! /usr/bin/env python
 
 import argparse
 import glob
@@ -34,15 +34,11 @@ class AsrListener(object):
             self.recognizer = recognizer
         else:
             self.recognizer = sr.Recognizer()
-        if not microphone:
-
-            wm = sr.Microphone.list_working_microphones()
-            if not wm:
-                logging.warn("No working microphones")
-
-            self.microphone = sr.Microphone(list(wm.keys())[0], 16000)
-        else:
+        if microphone:
             self.microphone = microphone
+        else:
+            self.microphone = sr.Microphone(
+                sr.Microphone.list_microphone_names().index('pulse'), 16000)
         self.adjust()
 
     def adjust(self):
@@ -65,8 +61,7 @@ class AsrListener(object):
                 # audio.get_wav
                 # response["transcription"] = recognizer.recognize_azure(
                 # audio, key = "428f1eb50a494da0b49a56c938500444", location = "westus2")
-                result = self.recognizer.recognize_speaktome(
-                    audio)
+                result = self.recognizer.recognize_speaktome(audio)
                 logging.info(str(result))
                 if result:
                     response["transcription"] = result['data'][0].get(

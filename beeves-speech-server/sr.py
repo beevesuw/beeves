@@ -1476,6 +1476,7 @@ class Recognizer(AudioSource):
             response = requests.post(endpoint_url, headers=mozcloud_headers, data=opus_data) # urlopen(request, timeout=self.operation_timeout)
             result = response.json()
         except Exception as e:
+            logging.debug(e)
             raise RequestError("recognition request failed: {}".format(e.reason))        
         return result
 
