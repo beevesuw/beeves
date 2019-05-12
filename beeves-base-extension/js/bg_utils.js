@@ -30,6 +30,7 @@ async function grok(extension, query){
     method: "POST"
   });
   res = await res.json();
+  console.log(res);
   return res;
 }
 
@@ -56,7 +57,7 @@ async function getBeevesMetadata(extensionID){
  * @description for testing only, displays metadata in local storage
  */
 function printStorage(){
-  browser.storage.local.get(['beeves_metadata', 'beeves_hotwords'], function(data){
-    //console.log(data);
+  browser.storage.local.get(['beeves_metadata', 'beeves_hotwords', 'clipboard'], function(data){
+    console.log(data);
   });
 }

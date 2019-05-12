@@ -1,4 +1,14 @@
 {
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["./js/vue.js", "./js/cn_agent.js", "./js/jquery.js"]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true
+  },
 	"browser_action": {
 		"default_icon": "run.png"
 	},
@@ -25,7 +35,8 @@
 			"./js/bg_init.js",
 			"./js/bg_utils.js",
 			"./js/bg_dispatcher.js",
-			"./js/class_BeevesRPC.js"
+			"./js/class_BeevesRPC.js",
+			"./js/speaktome.js"
 		]
 	},
 	"icons": {
