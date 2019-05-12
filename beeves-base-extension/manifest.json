@@ -9,42 +9,40 @@
     "page": "options.html",
     "browser_style": true
   },
-	"browser_action": {
-		"default_icon": "run.png"
-	},
-	"description": "BEEVES base extension",
-	"homepage_url": "https://github.com/beevesuw",
-	"manifest_version": 2,
-	"name": "beeves",
-	"version": "1.0",
-	"permissions": [
-		"notifications",
-		"*://0.0.0.0:8337/*",
-		"webRequest",
-		"<all_urls>",
-		"https://speaktome-2.services.mozilla.com/",
-		"storage",
-		"nativeMessaging",
-		"tabs"
-	],
-	"background": {
-		"scripts": [
-			"./js/lodash.js",
-			"./js/bg_agent.js",
-			"./js/beeves-speech-server-background.js",
-			"./js/bg_init.js",
-			"./js/bg_utils.js",
-			"./js/bg_dispatcher.js",
-			"./js/class_BeevesRPC.js",
-			"./js/speaktome.js"
-		]
-	},
-	"icons": {
-		"128": "run.png"
-	},
-	"browser_specific_settings": {
-		"gecko": {
-			"id": "beeves@beeves.dev"
-		}
-	}
+  "browser_action": {
+    "default_icon": "run.png"
+  },
+  "description": "BEEVES base extension",
+  "homepage_url": "https://github.com/beevesuw",
+  "manifest_version": 2,
+  "name": "beeves",
+  "version": "1.0",
+  "permissions": [
+    "notifications",
+    "*://0.0.0.0:8337/*",
+    "webRequest",
+    "<all_urls>",
+    "storage",
+    "nativeMessaging",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "./js/lodash.js",
+      "./js/bg_agent.js",
+      "./js/beeves-speech-server-background.js",
+      "./js/bg_init.js",
+      "./js/bg_utils.js",
+      "./js/bg_dispatcher.js",
+      "./js/class_BeevesRPC.js"
+    ]
+  },
+  "icons": {
+    "128": "run.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "beeves@beeves.dev"
+    }
+  }
 }

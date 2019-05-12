@@ -3,8 +3,8 @@ On startup, connect to the "ping_pong" app.
 */
 
 class BeevesNativeRouter {
-  constructor(target, mappings, mappingKey = "ns", logMesssages = true) {
-    // mappings should be like:
+  constructor(target, handlers, mappingKey = "ns", logMesssages = true) {
+    // handlers should be like:
     // {'hotword' : hotword_fn, 'stt' : stt_fn, 'nlu'}
     let beevesBackendPort = browser.runtime.connectNative(target);
 
@@ -13,14 +13,15 @@ class BeevesNativeRouter {
       this.logMessages = logMesssages;
       // Set up
 
-      this.port.onMessage.addListener((response) => {
-        if (this.logMessages) console.info("Received: " + JSON.stringify(response));
-        this.mappings = mappings;
+      this.port.onMessage.addListener(response => {
+        if (this.logMessages)
+          console.info("Received: " + JSON.stringify(response));
+        this.handlers = handlers;
         this.mappingKey = mappingKey;
 
         if (_.has(response, this.mappingKey)) {
           const ns = response[this.mappingKey];
-          let fn = _.get(this.mappings, response[this.mappingKey], console.log);
+          let fn = _.get(this.handlers, response[this.mappingKey], console.log);
           fn();
         }
       });
