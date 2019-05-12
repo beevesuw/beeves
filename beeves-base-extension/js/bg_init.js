@@ -4,26 +4,29 @@
  * @todo train the NLU backend for the current extension
  */
 
-    const beevesNativeRouterInstance = new BeevesNativeRouter("beeves_speech_server", {
-        hotword: (x) => {
-            return x;
-        }, // handle hot
-        speech: (x) => {
-            return x;
-        }, // handle speech
-        sys: (x) => {
-            return x;
-        } // handle other kind of message
-    });
-
+const beevesNativeRouterInstance = new BeevesNativeRouter(
+  "beeves_speech_server",
+  {
+    hotword: x => {
+      console.log("HANDLING HOT");
+      return x;
+    }, // handle hot
+    asr: x => {
+      console.log("HANDLING ASR");
+      return x;
+    }, // handle speech
+    sys: x => {
+      return x;
+    } // handle other kind of message
+  }
+);
 
 /**
  * @description clears beeves metadata when beeves-base is loaded
  */
 browser.runtime.onInstalled.addListener(function() {
-    let clearStorage = browser.storage.local.clear();
-})
-
+  let clearStorage = browser.storage.local.clear();
+});
 
 /**
  * @description metadata storage handler, maintains objects corresponding to
@@ -37,7 +40,10 @@ browser.runtime.onMessageExternal.addListener(async function(message, sender) {
 
 async function trainNLUBackend(sender) {
   let snipsfile = (await getBeevesMetadata(sender.id))["snips"];
-  let res = await putData(`http://localhost:8337/skill/${sender.id}`, snipsfile);
+  let res = await putData(
+    `http://localhost:8337/skill/${sender.id}`,
+    snipsfile
+  );
 }
 
 /**
@@ -49,12 +55,12 @@ async function updateBeevesMetadata(message, sender) {
   browser.storage.local.get("beeves_metadata", function(beeves_metadata) {
     beeves_metadata = beeves_metadata.beeves_metadata || beeves_metadata;
     beeves_metadata[sender.id] = message;
-    browser.storage.local.set({beeves_metadata}, function() {});
+    browser.storage.local.set({ beeves_metadata }, function() {});
   });
   browser.storage.local.get("beeves_hotwords", function(beeves_hotwords) {
     beeves_hotwords = beeves_hotwords.beeves_hotwords || beeves_hotwords;
     beeves_hotwords[message.beeves.hotword] = sender.id;
-    browser.storage.local.set({beeves_hotwords}, function() {
+    browser.storage.local.set({ beeves_hotwords }, function() {
       printStorage();
     });
   });

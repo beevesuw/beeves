@@ -45,10 +45,10 @@ class AsrListener(object):
         with self.microphone as source:
             self.recognizer.adjust_for_ambient_noise(source)
 
-    def recognize(self):
+    def recognize(self, timeout=6):
         with self.microphone as source:
             'starting listen'
-            audio = self.recognizer.listen(source)
+            audio = self.recognizer.listen(source, timeout=timeout)
             response = {
                 "ns": 'asr',
                 "success": True,
