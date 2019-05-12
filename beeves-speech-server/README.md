@@ -1,4 +1,5 @@
 # beeves-speech-server
+
 The hotword detection and ASR server for Beeves
 
 Extract this file so that you have a directory named `Porcupine/` in the root directory:
@@ -13,12 +14,9 @@ pip3 install -r Porcupine/requirements.txt
 pip3 install -r ./requirements.txt
 ```
 
-
 Then:
 
-
 Edit `beeves_speech_server.json` to put the absolute path to `start_beeves_speech_server.sh`:
-
 
 ```
 {
@@ -32,6 +30,5 @@ Edit `beeves_speech_server.json` to put the absolute path to `start_beeves_speec
 ```
 
 ```
-cp ./add-on/beeves_speech_server.json $HOME/.mozilla/native-messaging-hosts/beeves_speech_server.json
+cp .beeves_speech_server.json $HOME/.mozilla/native-messaging-hosts/beeves_speech_server.json
 ```
-

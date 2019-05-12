@@ -6,3 +6,6 @@ structlog
 webrtcvad
 halo
 scipy
+requests
+opuslib
+

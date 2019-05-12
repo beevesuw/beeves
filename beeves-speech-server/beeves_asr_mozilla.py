@@ -146,7 +146,7 @@ def main(ARGS):
     # Load DeepSpeech model
     if os.path.isdir(ARGS.model):
         model_dir = ARGS.model
-        ARGS.model = os.path.join(model_dir, 'output_graph.pbmm')
+        ARGS.model = os.path.join(model_dir, 'output_graph.rounded.pbmm')
         ARGS.alphabet = os.path.join(model_dir, ARGS.alphabet if ARGS.alphabet else 'alphabet.txt')
         ARGS.lm = os.path.join(model_dir, ARGS.lm)
         ARGS.trie = os.path.join(model_dir, ARGS.trie)

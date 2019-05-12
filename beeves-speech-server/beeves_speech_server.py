@@ -13,23 +13,29 @@ from threading import Thread
 from beeves_util import send_native_message, recv_native_message
 import subprocess
 import sounddevice as sd
+import sr
+
+from beeves_asr_listener import AsrListener
+
 import numpy  # Make sure NumPy is loaded before it is used in the callback
 
 assert numpy  # avoid "imported but unused" message (W0611)
 
 
-sys.path.append(os.path.join(os.path.dirname(__file__), 'Porcupine/binding/python'))
+sys.path.append(os.path.join(os.path.dirname(
+    __file__), 'Porcupine/binding/python'))
 
 from porcupine import Porcupine  # noqa
 
 logging.basicConfig(level=logging.DEBUG)
 
+
 def get_keywords_directory(base_dir='./Porcupine/resources/keyword_files'):
     system = platform.system()
 
     dir_mappings = {
-        'Darwin' : 'mac',
-        'Linux'  : 'linux',
+        'Darwin': 'mac',
+        'Linux': 'linux',
         'Windows': 'windows'
     }
 
@@ -42,7 +48,6 @@ def int_or_str(text):
         return int(text)
     except ValueError:
         return text
-
 
 
 class HotwordServer(Thread):
@@ -58,7 +63,6 @@ class HotwordServer(Thread):
             model_file_path,
             keyword_dir,
             sensitivity=0.5):
-
         """
         Constructor.
 
@@ -76,15 +80,18 @@ class HotwordServer(Thread):
         self._model_file_path = model_file_path
         self.keyword_dir = keyword_dir
         self._current_keyword = None
+        self.asr = AsrListener()
 
-        logging.info(f'{self._library_path}, {self._model_file_path}, {self.keyword_dir}')
+        logging.info(
+            f'{self._library_path}, {self._model_file_path}, {self.keyword_dir}')
 
     @property
     def keywords(self):
         paths = set(glob.glob(os.path.join(self.keyword_dir, '*.ppn'), recursive=True)) - set(
             glob.glob(os.path.join(self.keyword_dir, '*_compressed.ppn'), recursive=True))
 
-        result = dict(zip([os.path.basename(x).replace('.ppn', '').split('_')[0] for x in paths], paths))
+        result = dict(zip([os.path.basename(x).replace(
+            '.ppn', '').split('_')[0] for x in paths], paths))
         logging.info('Keys: %r' % (repr([x for x in result.keys()])))
         return result
 
@@ -105,15 +112,11 @@ class HotwordServer(Thread):
                 result = porcupine.process(pcm)
                 if result:
                     send_native_message({'ns': 'hotword', 'state': 'on'})
-
-                    logging.info('[%s] detected keyword' % str(datetime.now()))
-
-
-
-                    #with sd.InputStream(samplerate=args.samplerate, device=args.device, channels=args.channels, callback=sdcallback) as asr_stream:
+                    asr_result = self.asr.recognize()
+                    send_native_message(asr_result)
+                    # with sd.InputStream(samplerate=args.samplerate, device=args.device, channels=args.channels, callback=sdcallback) as asr_stream:
                     #    logging.info('Delegating to ASR...')
                     #    pass
-
 
         porcupine = None
         audio_stream = None
@@ -155,7 +158,8 @@ def get_library_path():
             return os.path.join(os.path.dirname(__file__), 'Porcupine\\lib\\windows\\i686\\libpv_porcupine.dll')
         else:
             return os.path.join(os.path.dirname(__file__), 'Porcupine\\lib\\windows\\amd64\\libpv_porcupine.dll')
-    raise NotImplementedError('Porcupine is not supported on %s/%s yet!' % (system, machine))
+    raise NotImplementedError(
+        'Porcupine is not supported on %s/%s yet!' % (system, machine))
 
 
 if __name__ == '__main__':
@@ -175,7 +179,8 @@ if __name__ == '__main__':
         type=str,
         default=os.path.join(os.path.dirname(__file__), 'Porcupine/lib/common/porcupine_params.pv'))
 
-    parser.add_argument('--sensitivity', help='detection sensitivity [0, 1]', default=0.5)
+    parser.add_argument(
+        '--sensitivity', help='detection sensitivity [0, 1]', default=0.5)
 
     parser.add_argument(
         '-l', '--list-devices', action='store_true',
