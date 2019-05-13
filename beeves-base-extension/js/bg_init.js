@@ -11,9 +11,11 @@ const beevesNativeRouterInstance = new BeevesNativeRouter(
       console.log("HANDLING HOT");
       return x;
     }, // handle hot
-    asr: x => {
+    asr: asrMessage => {
       console.log("HANDLING ASR");
-      return x;
+      console.log(asrMessage);
+      dispatch({text : asrMessage.transcription});
+      return asrMessage;
     }, // handle speech
     sys: x => {
       return x;

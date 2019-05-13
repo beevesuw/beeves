@@ -13,16 +13,16 @@ class BeevesNativeRouter {
       this.logMessages = logMesssages;
       // Set up
 
-      this.port.onMessage.addListener(response => {
+      this.port.onMessage.addListener(message => {
         if (this.logMessages)
-          console.info("Received: " + JSON.stringify(response));
+          console.info("Received: " + JSON.stringify(message));
         this.handlers = handlers;
         this.mappingKey = mappingKey;
 
-        if (_.has(response, this.mappingKey)) {
-          const ns = response[this.mappingKey];
-          let fn = _.get(this.handlers, response[this.mappingKey], console.log);
-          fn();
+        if (_.has(message, this.mappingKey)) {
+          const ns = message[this.mappingKey];
+          let fn = _.get(this.handlers, message[this.mappingKey], console.log);
+          fn(message);
         }
       });
     }
