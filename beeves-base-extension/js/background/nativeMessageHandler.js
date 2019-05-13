@@ -1,7 +1,3 @@
-/*
-On startup, connect to the "ping_pong" app.
-*/
-
 class BeevesNativeRouter {
   constructor(target, handlers, mappingKey = "ns", logMesssages = true) {
     // handlers should be like:

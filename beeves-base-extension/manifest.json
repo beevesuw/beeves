@@ -1,22 +1,15 @@
 {
-  "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "js": ["./js/vue.js", "./js/cn_agent.js", "./js/jquery.js"]
-    }
-  ],
-  "options_ui": {
-    "page": "options.html",
-    "browser_style": true
-  },
-  "browser_action": {
-    "default_icon": "run.png"
-  },
   "description": "BEEVES base extension",
   "homepage_url": "https://github.com/beevesuw",
   "manifest_version": 2,
   "name": "beeves",
   "version": "1.0",
+  "icons": {
+    "128": "run.png"
+  },
+  "browser_action": {
+    "default_icon": "run.png"
+  },
   "permissions": [
     "notifications",
     "*://0.0.0.0:8337/*",
@@ -28,17 +21,26 @@
   ],
   "background": {
     "scripts": [
-      "./js/lodash.js",
-      "./js/bg_agent.js",
-      "./js/beeves-speech-server-background.js",
-      "./js/bg_init.js",
-      "./js/bg_utils.js",
-      "./js/bg_dispatcher.js",
-      "./js/class_BeevesRPC.js"
+      "./lib/lodash.js",
+      "./lib/jquery.js",
+      "./lib/vue.js",
+      "./js/background/nativeMessageHandler.js",
+      "./js/background/agent.js",
+      "./js/background/beevesRPC.js",
+      "./js/background/dispatcher.js",
+      "./js/background/init.js",
+      "./js/background/utils.js"
     ]
   },
-  "icons": {
-    "128": "run.png"
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["./lib/vue.js", "./lib/jquery.js", "./js/content/cn_agent.js"]
+    }
+  ],
+  "options_ui": {
+    "page": "./options/options.html",
+    "browser_style": true
   },
   "browser_specific_settings": {
     "gecko": {
