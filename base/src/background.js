@@ -7,6 +7,13 @@
 import * as BeevesUtils from "./BeevesUtils.js";
 import BeevesNativeRouter from "./BeevesNativeRouter.js";
 
+/**
+ * @description clears beeves metadata when beeves-base is loaded
+ */
+browser.runtime.onInstalled.addListener(function() {
+  let clearStorage = browser.storage.local.clear();
+});
+
 export const beevesNativeRouterInstance = new BeevesNativeRouter(
   "beeves_speech_server",
   {
@@ -26,27 +33,21 @@ export const beevesNativeRouterInstance = new BeevesNativeRouter(
   }
 );
 
-/**
- * @description clears beeves metadata when beeves-base is loaded
- */
-browser.runtime.onInstalled.addListener(function() {
-  let clearStorage = browser.storage.local.clear();
-  browser.runtime.onMessage.addListener(BeevesUtils.dispatch);
-});
 
 /**
  * @description metadata storage handler, maintains objects corresponding to
  * beeves.json files and hotword-extension mapping
  */
 browser.runtime.onMessageExternal.addListener(async function(message, sender) {
-  updateBeevesMetadata(message, sender);
+  BeevesUtils.printStorage();
+  BeevesUtils.updateBeevesMetadata(message, sender);
   await BeevesUtils.timeout(1000);
   await trainNLUBackend(sender);
 });
 
 export async function trainNLUBackend(sender) {
-  let snipsfile = (await getBeevesMetadata(sender.id))["snips"];
-  let res = await putData(
+  let snipsfile = (await BeevesUtils.getBeevesMetadata(sender.id))["snips"];
+  let res = await BeevesUtils.putData(
     `http://localhost:8337/skill/${sender.id}`,
     snipsfile
   );
