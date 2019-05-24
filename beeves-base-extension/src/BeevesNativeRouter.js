@@ -1,4 +1,5 @@
-class BeevesNativeRouter {
+import _ from "lodash";
+export default class BeevesNativeRouter {
   constructor(target, handlers, mappingKey = "ns", logMesssages = true) {
     // handlers should be like:
     // {'hotword' : hotword_fn, 'stt' : stt_fn, 'nlu'}

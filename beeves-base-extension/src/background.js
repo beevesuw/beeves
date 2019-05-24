@@ -4,7 +4,10 @@
  * @todo train the NLU backend for the current extension
  */
 
-const beevesNativeRouterInstance = new BeevesNativeRouter(
+import * as BeevesUtils from "./BeevesUtils.js";
+import BeevesNativeRouter from "./BeevesNativeRouter.js";
+
+export const beevesNativeRouterInstance = new BeevesNativeRouter(
   "beeves_speech_server",
   {
     hotword: x => {
@@ -14,7 +17,7 @@ const beevesNativeRouterInstance = new BeevesNativeRouter(
     asr: asrMessage => {
       console.log("HANDLING ASR");
       console.log(asrMessage);
-      dispatch({text : asrMessage.transcription});
+      BeevesUtils.dispatch({ text: asrMessage.transcription });
       return asrMessage;
     }, // handle speech
     sys: x => {
@@ -28,6 +31,7 @@ const beevesNativeRouterInstance = new BeevesNativeRouter(
  */
 browser.runtime.onInstalled.addListener(function() {
   let clearStorage = browser.storage.local.clear();
+  browser.runtime.onMessage.addListener(BeevesUtils.dispatch);
 });
 
 /**
@@ -36,11 +40,11 @@ browser.runtime.onInstalled.addListener(function() {
  */
 browser.runtime.onMessageExternal.addListener(async function(message, sender) {
   updateBeevesMetadata(message, sender);
-  await timeout(1000);
+  await BeevesUtils.timeout(1000);
   await trainNLUBackend(sender);
 });
 
-async function trainNLUBackend(sender) {
+export async function trainNLUBackend(sender) {
   let snipsfile = (await getBeevesMetadata(sender.id))["snips"];
   let res = await putData(
     `http://localhost:8337/skill/${sender.id}`,
@@ -53,18 +57,3 @@ async function trainNLUBackend(sender) {
  * beeves.json files and hotword-extension mapping
  * @todo REFACTOR
  */
-async function updateBeevesMetadata(message, sender) {
-  browser.storage.local.get("beeves_metadata", function(beeves_metadata) {
-    beeves_metadata = beeves_metadata.beeves_metadata || beeves_metadata;
-    beeves_metadata[sender.id] = message;
-    browser.storage.local.set({ beeves_metadata }, function() {});
-  });
-  browser.storage.local.get("beeves_hotwords", function(beeves_hotwords) {
-    beeves_hotwords = beeves_hotwords.beeves_hotwords || beeves_hotwords;
-    beeves_hotwords[message.beeves.hotword] = sender.id;
-    browser.storage.local.set({ beeves_hotwords }, function() {
-      printStorage();
-    });
-  });
-  return Promise.resolve(true);
-}

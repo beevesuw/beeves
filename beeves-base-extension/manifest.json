@@ -20,26 +20,18 @@
     "tabs"
   ],
   "background": {
-    "scripts": [
-      "./lib/lodash.js",
-      "./lib/jquery.js",
-      "./lib/vue.js",
-      "./js/background/nativeMessageHandler.js",
-      "./js/background/agent.js",
-      "./js/background/beevesRPC.js",
-      "./js/background/dispatcher.js",
-      "./js/background/init.js",
-      "./js/background/utils.js"
-    ]
+    "scripts": ["background.build.js"]
   },
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
-      "js": ["./lib/vue.js", "./lib/jquery.js", "./js/content/cn_agent.js"]
+      "matches": ["<all_urls>"],
+      "js": ["index.build.js"],
+      "match_about_blank": true,
+      "run_at": "document_end"
     }
   ],
   "options_ui": {
-    "page": "./options/options.html",
+    "page": "./options.html",
     "browser_style": true
   },
   "browser_specific_settings": {
