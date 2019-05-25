@@ -69,7 +69,7 @@ echo 'Creating native messaging host manifest'
 
 NM_FILENAME=$(cat "${NM_DEFAULT_FILENAME}" | jq -r '.name')".json"
 
-cat $NM_DEFAULT_FILENAME | jq -r --arg cwd $(pwd) '.path = $cwd + "/start_beeves_asr.sh"' >$NM_FILENAME
+cat $NM_DEFAULT_FILENAME | jq -r --arg cwd $(pwd) '.path = $cwd + "/start_beeves_speech_server.sh"' >$NM_FILENAME
 
 echo 'Installing native messaging host manifest'
 

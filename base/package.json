@@ -5,7 +5,9 @@
   "main": "./beeves-base-extension/js/bg_init.js",
   "scripts": {
     "build": "npx rimraf dist && npx webpack --progress --config webpack.config.js",
-    "test": "npx web-ext run --source-dir ./dist/ --pref security.csp.enable=false --pref security.csp.enableStrictDynamic=false  --browser-console --url about:debugging --verbose",
+    "watch": "npx rimraf dist && npx webpack --progress --watch --config webpack.config.js",
+
+    "test": "npx web-ext run --source-dir ./dist/ --pref security.csp.enable=false  --browser-console --url http://news.ycombinator.com --verbose",
     "dl-porcupine": "",
     "demo:example": "#  NOT WORKING cross-env MOZ_DISABLE_CONTENT_SANDBOX=1 web-ext run --browser-console --url about:debugging --source-dir demo/example",
     "//": "comment: fix demo:example above to launch ff with beeves and the extension"
@@ -25,6 +27,7 @@
   "homepage": "https://beeves.dev",
   "devDependencies": {
     "@babel/core": "^7.4.5",
+    "@fortawesome/fontawesome-free": "^5.8.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.18",
     "@fortawesome/free-solid-svg-icons": "^5.8.2",
     "@fortawesome/vue-fontawesome": "^0.1.6",
@@ -43,8 +46,11 @@
     "node-sass": "^4.12.0",
     "prettier": "^1.17.1",
     "rimraf": "^2.6.3",
+    "sass-loader": "^7.1.0",
     "scss-loader": "^0.0.1",
     "style-loader": "^0.23.1",
+    "svg-inline-loader": "^0.8.0",
+    "tar": ">=4.4.2",
     "ts-loader": "^6.0.1",
     "typescript": "^3.4.5",
     "url-loader": "^1.1.2",
@@ -56,8 +62,7 @@
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
     "webpack-merge": "^4.2.1",
-    "webpack-stream": "^5.2.1",
-    "tar": ">=4.4.2"
+    "webpack-stream": "^5.2.1"
   },
   "dependencies": {
     "adaptivecards": "^1.1.3",
