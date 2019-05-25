@@ -1,27 +1,20 @@
-## What does this currently do?
+# Table of contents
+1. [Installtion](#installation)
+2. [Some paragraph](#paragraph1)
+    1. [Sub paragraph](#subparagraph1)
+3. [Another paragraph](#paragraph2)
 
-- Loads a Beeves metadata file, a superset of a snips file, on installation
-- Maintains extension metadata and hotword dicts in browser.storage.local
-- Train the backend when a new beeves compliant extension is registered
-- Dispatch commands to the backend and recieve parsed intents with slot data
-- Send this to the extension in question, which has implemented response functionality
-- Extremely basic speech to text
+## Installation <a name="installation"></a>
+```
+git clone https://github.com/beevesuw/beeves
+```
 
-## TODO:
+## Some paragraph <a name="paragraph1"></a>
+The first paragraph text
 
-## Notes on the Beeves metadata file
+### Sub paragraph <a name="subparagraph1"></a>
+This is a sub paragraph, formatted in heading 3 style
 
-- contains a snips file describing intents etc.
-- contains activation keyword (do we need a global registry mapping activation keywords to beeves enabled extensions to prevent conflicts?)
-- for extensions that manipulate the DOM and perform site-specific actions, do we need a list of URIs on which the extension is allowed to perform actions?
+## Another paragraph <a name="paragraph2"></a>
+The second paragraph text
 
-## Instructions:
-
-
-### Install
-
-In the root directory (`beeves`), type:
-`npm run install`
-
-### Run
-`npm run test`
