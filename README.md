@@ -31,7 +31,7 @@ npm run test
 
 
 ## Overview <a name="overview"></a>
-Overview
+Beeves stands for Browser ExtEnsion Voice Enhancement System.
 
 ### Sub paragraph <a name="subparagraph1"></a>
 This is a sub paragraph, formatted in heading 3 style
