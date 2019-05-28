@@ -1,3 +1,5 @@
+import { getBeevesMetadata } from "./BeevesMetadataUtils.js";
+
 export async function putData(endpoint, payload) {
     try {
       let res = await fetch(endpoint, {
@@ -17,8 +19,8 @@ export async function putData(endpoint, payload) {
   }
 
   export async function trainNLUBackend(sender) {
-    let snipsfile = (await BeevesMetadataUtils.getBeevesMetadata(sender.id))["snips"];
-    let res = await BeevesNLUtils.putData(
+    let snipsfile = (await getBeevesMetadata(sender.id))["snips"];
+    let res = await putData(
       `http://localhost:8337/skill/${sender.id}`,
       snipsfile
     );

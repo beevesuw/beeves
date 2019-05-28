@@ -1,5 +1,5 @@
 # Table of contents
-1. [Installtion](#installation)
+1. [Installation](#installation)
 2. [Overview](#overview)
     1. [Sub paragraph](#subparagraph1)
 3. [Another paragraph](#paragraph2)
@@ -28,7 +28,6 @@ Run the base extension in Firefox
 ```
 npm run test
 ```
-
 
 ## Overview <a name="overview"></a>
 Overview

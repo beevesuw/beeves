@@ -23,7 +23,7 @@ export async function updateBeevesMetadata(message, sender) {
         beeves_hotwords = beeves_hotwords.beeves_hotwords || beeves_hotwords;
         beeves_hotwords[message.beeves.hotword] = sender.id;
         browser.storage.local.set({ beeves_hotwords }, function() {
-        printStorage();
+        //printStorage();
         });
     });
     return Promise.resolve(true);
