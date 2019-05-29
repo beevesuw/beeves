@@ -32,9 +32,7 @@ export const beevesNativeRouterInstance = new BeevesNativeRouter(
 browser.runtime.onMessageExternal.addListener(async function(message, sender) {
   updateBeevesMetadata(message, sender);
   await timeout(1000);
-  console.log('ok1');
   await trainNLUBackend(sender);
-  console.log('ok2');
 });
 
 export async function timeout(ms) {
