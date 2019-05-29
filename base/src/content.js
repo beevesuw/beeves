@@ -13,3 +13,7 @@ new Vue({
   render: createElement => createElement(Popup)
 });
 
+browser.runtime.onMessage.addListener(message => {
+  alert(JSON.stringify(message));
+  return Promise.resolve(true);
+});

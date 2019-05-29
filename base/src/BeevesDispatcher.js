@@ -1,5 +1,6 @@
 import { grok } from "./BeevesNLUtils.js";
 import {getBeevesMetadata} from "./BeevesMetadataUtils.js";
+import {sendResponseToAgent} from "./BeevesContentUtils.js";
 
 export async function dispatch(message) {
   let extensionID = await hotwordMapper(message["text"].split(" ")[0]);
@@ -10,8 +11,8 @@ export async function dispatch(message) {
   let intentName = grokked.parse_result.intent.intentName;
   let functionName = await mapIntent(extensionID, intentName);
   let slotsObj = await getArguments(grokked);
-  await new BeevesRPC(extensionID, functionName, slotsObj).execute();
-  return Promise.resolve(true);
+  let response = await new BeevesRPC(extensionID, functionName, slotsObj).execute();
+  await sendResponseToAgent(response);
 }
 
 async function hotwordMapper(hotword) {
