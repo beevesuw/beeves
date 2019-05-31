@@ -101,5 +101,21 @@ Here is an end-to-end example of intent parsing:
 ```
 
 ## Intent File Formatting <a name="paragraph2"></a>
-Intent files ingested by Beeves must be specified using the SNIPS ontology format
+Intent files ingested by Beeves must be specified using the SNIPS JSON format
+
+## Using Beeves from a webextension
+Define a Beeves action handler object: function names correspond to intents specified in the Beeves file
+```
+let beevesActionHandler = {
+  newTab: (room, color) => {
+    const creating = browser.tabs.create({
+      url: "https://example.org"
+    });
+    console.log("creating new tab!");
+    response = beevesConnector.createResponse(0, 'confirmation');
+    return response;
+  }
+};
+```
+
 
