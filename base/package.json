@@ -68,7 +68,7 @@
   "dependencies": {
     "adaptivecards": "^1.1.3",
     "buefy": "^0.7.6",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "vue": "^2.6.10",
     "vue-beautiful-chat": "^2.2.2"
   }
